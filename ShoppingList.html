@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <head> 
+      <title> Ramone' Shopping </title>
+       <link rel="stylesheet" type="text/css" href="lab6.css">
+  </head>
+<body >
+
+<script>
+var app = angular.module("myShoppingList", []); 
+app.controller("myCtrl", function($scope) {
+    $scope.products = ["Milk", "Bread", "Cheese"];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your shopping list.";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";
+        $scope.products.splice(x, 1);
+    } 
+});
+
+</script>
+<div class = "papa" >
+        <div ng-app="myShoppingList" ng-controller="myCtrl">
+                <h1 style="color: #b2c9a9"> Ramone's Shopping List</h1>
+                <hr>
+                <ul style="color: black; font-family: Comic Sans MS">
+        <li ng-repeat="x in products">
+            {{x}}
+            <span ng-click="removeItem($index)">&times;</span>
+        </li>
+    </ul>
+    <input ng-model="addMe">
+    <button ng-click="addItem()">Add</button>
+    <p>{{errortext}}</p>
+</div>
+    </div>
+
+</body>
+</html>
